@@ -141,6 +141,7 @@ class MessageSource extends \yii\i18n\MessageSource
             'fr' => 'Français',
             'nl' => 'Nederlands',
             'ca' => 'Català',
+            'lv' => 'Latviešu',
             'me' => 'Montenegrin',
         ];
     }
