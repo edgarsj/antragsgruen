@@ -21,7 +21,11 @@ RUN pecl install opentelemetry protobuf \
 
 RUN apt-get install -y weasyprint imagemagick poppler-utils
 
-RUN mkdir /tmp/viewcache && chown www-data:www-data /tmp/viewcache
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    && sed -i 's|^error_log =.*|error_log = /var/log/php-errors.log|' /usr/local/etc/php/php.ini \
+    && touch /var/log/php-errors.log && chown 1000:1000 /var/log/php-errors.log
+
+RUN mkdir /tmp/viewcache && chown 1000:1000 /tmp/viewcache
 
 WORKDIR /var/www/antragsgruen
 
