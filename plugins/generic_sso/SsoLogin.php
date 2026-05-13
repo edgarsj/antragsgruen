@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace app\plugins\generic_sso;
 
 use app\components\{LoginProviderInterface, RequestContext, UrlHelper};
-use app\models\db\{ConsultationUserGroup, User};
+use app\models\db\{Consultation, ConsultationUserGroup, User};
 use app\models\settings\{AntragsgruenApp, Site as SiteSettings};
 use app\plugins\generic_sso\{OidcProvider, SamlProvider};
 use yii\helpers\Url;
@@ -317,7 +317,44 @@ class SsoLogin implements LoginProviderInterface
             $this->syncUserGroups($user, $userData['groups']);
         }
 
+        // Auto-assign userGroups based on user.organization matching consultation.organisations[].name
+        $this->applyAutoUserGroupsByOrganisation($user);
+
         return $user;
+    }
+
+    /**
+     * For each consultation on the site, look up consultation.settings.organisations.
+     * If the user.organization equals one of organisations[].name, link the user to that
+     * org's autoUserGroups (idempotent).
+     */
+    private function applyAutoUserGroupsByOrganisation(User $user): void
+    {
+        if (empty($user->organization)) {
+            return;
+        }
+        $existingGroupIds = array_map(static fn(ConsultationUserGroup $g): int => $g->id, (array)$user->userGroups);
+        foreach (Consultation::find()->all() as $consultation) {
+            $orgs = $consultation->getSettings()->organisations ?? [];
+            foreach ((array)$orgs as $org) {
+                if (!isset($org->name) || $org->name !== $user->organization) {
+                    continue;
+                }
+                foreach (($org->autoUserGroups ?? []) as $groupId) {
+                    $groupId = (int)$groupId;
+                    if (in_array($groupId, $existingGroupIds, true)) {
+                        continue;
+                    }
+                    $group = ConsultationUserGroup::findOne($groupId);
+                    if (!$group) {
+                        continue;
+                    }
+                    $user->link('userGroups', $group);
+                    $existingGroupIds[] = $groupId;
+                    \Yii::warning('SSO: auto-added user ' . $user->id . ' to userGroup ' . $group->id . ' (' . $group->title . ') via organization=' . $user->organization);
+                }
+            }
+        }
     }
 
     /**
