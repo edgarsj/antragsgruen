@@ -127,7 +127,16 @@ function taskBuildJsEnGb() {
         .pipe(gulp.dest('./web/js/build/'));
 }
 
-const taskBuildJs = gulp.parallel(taskBuildJsMain, taskBuildJsDe, taskBuildJsFr, taskBuildJsNl, taskBuildJsCa, taskBuildJsMe, taskBuildJsEn, taskBuildJsEnGb, taskBuildDatetimepicker);
+function taskBuildJsLv() {
+    return gulp.src(["web/js/antragsgruen-lv.js"])
+        .pipe(sourcemaps.init())
+        .pipe(concat('antragsgruen-lv.min.js'))
+        .pipe(terser())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./web/js/build/'));
+}
+
+const taskBuildJs = gulp.parallel(taskBuildJsMain, taskBuildJsDe, taskBuildJsFr, taskBuildJsNl, taskBuildJsCa, taskBuildJsMe, taskBuildJsEn, taskBuildJsEnGb, taskBuildJsLv, taskBuildDatetimepicker);
 
 /**
  * @see https://sass-lang.com/documentation/js-api/interfaces/options/
@@ -169,7 +178,7 @@ function taskBuildHtml2PdfCss() {
 
 function taskWatch() {
     gulp.watch(main_js_files, {usePolling: true}, taskBuildJs);
-    gulp.watch(["web/js/antragsgruen-de.js", "web/js/antragsgruen-en.js", "web/js/antragsgruen-en-gb.js"], {usePolling: true}, taskBuildJs);
+    gulp.watch(["web/js/antragsgruen-de.js", "web/js/antragsgruen-en.js", "web/js/antragsgruen-en-gb.js", "web/js/antragsgruen-lv.js"], {usePolling: true}, taskBuildJs);
     gulp.watch(["web/js/bootstrap-datetimepicker.js"], {usePolling: true}, taskBuildDatetimepicker);
     gulp.watch(["web/css/*.scss"], {usePolling: true}, gulp.parallel(taskBuildCss, taskBuildPluginCss));
     gulp.watch(["plugins/**/*.scss"], {usePolling: true}, taskBuildPluginCss);
@@ -178,6 +187,7 @@ function taskWatch() {
 }
 
 gulp.task('build-js', taskBuildJs);
+gulp.task('build-js-lv', taskBuildJsLv);
 gulp.task('build-typescript', taskBuildTypescript);
 gulp.task('build-css', taskBuildCss);
 gulp.task('build-html2pdf-css', taskBuildHtml2PdfCss);
