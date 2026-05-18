@@ -47,7 +47,7 @@ class BDKPDF extends IPdfWriter
             return;
         }
 
-        $this->SetFont('helvetica', '', 10);
+        $this->SetFont('dejavusans', '', 10);
         $title = '<span style="font-size: 16px;">' . Html::encode($this->headerPrefix) . ' </span>';
         $title .= '<span style="font-size: 14px;">' . Html::encode($this->headerTitle) . '</span>';
         $this->writeHTMLCell(
@@ -72,7 +72,7 @@ class BDKPDF extends IPdfWriter
         }
 
         $this->SetY(-15);
-        $this->SetFont('helvetica', '', 10);
+        $this->SetFont('dejavusans', '', 10);
         $this->Cell(
             185,
             10,

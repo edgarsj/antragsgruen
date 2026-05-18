@@ -148,7 +148,7 @@ abstract class IPDFLayout
 
     public function printSectionHeading(string $text): void
     {
-        $this->pdf->setFont('helvetica', '', 12);
+        $this->pdf->setFont('dejavusans', '', 12);
         $this->pdf->ln(2);
         $this->pdf->MultiCell(0, 0, '<h4>' . $text . '</h4>', 0, 'L', false, 1, null, null, true, 0, true);
     }

@@ -41,11 +41,11 @@ class BDK extends IPDFLayout
         $title = str_replace("\n", '<br>', $pdfIntroduction);
         $pdf->SetY(35);
         if ($title) {
-            $pdf->SetFont("helvetica", "", 13);
+            $pdf->SetFont("dejavusans", "", 13);
             $pdf->writeHTMLCell(185, 0, 10, 10, $title, 0, 1, false, true, 'R');
         }
 
-        $pdf->SetFont("helvetica", "", 12);
+        $pdf->SetFont("dejavusans", "", 12);
 
         $pdf->setCellPaddings(2, 4, 2, 4);
         $pdf->writeHTMLCell(170, 0, 25, 35, $tableContent, 1, 1, false, true, 'L');

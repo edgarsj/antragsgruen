@@ -39,7 +39,7 @@ class IPdfWriter extends Fpdi
         if ($section && $section->getSettings()->fixedWidth) {
             return 'dejavusansmono';
         } else {
-            return 'helvetica';
+            return 'dejavusans';
         }
     }
 

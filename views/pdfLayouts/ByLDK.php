@@ -33,11 +33,11 @@ class ByLDK extends IPDFLayout
             }
             if ($revName === '') {
                 $revName = \Yii::t('export', 'draft');
-                $pdf->SetFont('helvetica', 'I', 25);
-                $width = (float)$pdf->GetStringWidth($revName, 'helvetica', 'I', 25) + 3.1;
+                $pdf->SetFont('dejavusans', 'I', 25);
+                $width = (float)$pdf->GetStringWidth($revName, 'dejavusans', 'I', 25) + 3.1;
             } else {
-                $pdf->SetFont('helvetica', 'B', 25);
-                $width = (float)$pdf->GetStringWidth($revName, 'helvetica', 'B', 25) + 3.1;
+                $pdf->SetFont('dejavusans', 'B', 25);
+                $width = (float)$pdf->GetStringWidth($revName, 'dejavusans', 'B', 25) + 3.1;
             }
             if ($width < 35) {
                 $width = 35;
@@ -65,7 +65,7 @@ class ByLDK extends IPDFLayout
         }
 
         $str = $motion->motionType->titleSingular;
-        $pdf->SetFont('helvetica', 'B', 25);
+        $pdf->SetFont('dejavusans', 'B', 25);
         $width = (float)$pdf->GetStringWidth($str);
 
         $pdf->SetXY((210 - $width) / 2, 60);
@@ -85,36 +85,36 @@ class ByLDK extends IPDFLayout
         }
         if ($intro) {
             $pdf->SetX(24);
-            $pdf->SetFont('helvetica', 'B', 12);
+            $pdf->SetFont('dejavusans', 'B', 12);
             $pdf->MultiCell(160, 13, $intro, 0, 'C');
             $pdf->Ln(7);
         }
 
         $pdf->SetX(12);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
         $pdf->MultiCell(50, 0, \Yii::t('export', 'Initiators') . ':', 0, 'L', false, 0);
-        $pdf->SetFont('helvetica', '', 12);
+        $pdf->SetFont('dejavusans', '', 12);
         $pdf->MultiCell(120, 0, $motion->getInitiatorsStr(), 0, 'L');
         $pdf->Ln(5);
 
         $proposal = $motion->getLatestProposal();
         if ($motion->getMyMotionType()->getSettingsObj()->showProposalsInExports && $proposal->proposalStatus !== null && $proposal->isProposalPublic()) {
             $pdf->SetX(12);
-            $pdf->SetFont('helvetica', 'B', 12);
+            $pdf->SetFont('dejavusans', 'B', 12);
             $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
             $pdf->MultiCell(50, 0, \Yii::t('export', 'proposed_procedure') . ':', 0, 'L', false, 0);
-            $pdf->SetFont('helvetica', '', 12);
+            $pdf->SetFont('dejavusans', '', 12);
             $pdf->MultiCell(120, 0, $motion->getLatestProposal()->getFormattedProposalStatus(), 0, 'L');
             $pdf->Ln(5);
         }
 
         $pdf->SetX(12);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
 
         $pdf->MultiCell(50, 0, \Yii::t('export', 'title') . ':', 0, 'L', false, 0);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $borderStyle = ['width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => [150, 150, 150]];
         $pdf->MultiCell(
             100,
@@ -153,11 +153,11 @@ class ByLDK extends IPDFLayout
             $revName = $amendment->getFormattedTitlePrefix();
             if ($revName === '') {
                 $revName = \Yii::t('export', 'draft');
-                $pdf->SetFont('helvetica', 'I', 25);
-                $width = (float)$pdf->GetStringWidth($revName, 'helvetica', 'I', 25) + 3.1;
+                $pdf->SetFont('dejavusans', 'I', 25);
+                $width = (float)$pdf->GetStringWidth($revName, 'dejavusans', 'I', 25) + 3.1;
             } else {
-                $pdf->SetFont('helvetica', 'B', 25);
-                $width = (float)$pdf->GetStringWidth($revName, 'helvetica', 'B', 25) + 3.1;
+                $pdf->SetFont('dejavusans', 'B', 25);
+                $width = (float)$pdf->GetStringWidth($revName, 'dejavusans', 'B', 25) + 3.1;
             }
             if ($width < 35) {
                 $width = 35;
@@ -185,7 +185,7 @@ class ByLDK extends IPDFLayout
         }
 
         $str = $amendment->getMyMotion()->motionType->titleSingular;
-        $pdf->SetFont('helvetica', 'B', 25);
+        $pdf->SetFont('dejavusans', 'B', 25);
         $width = (float)$pdf->GetStringWidth($str);
 
         $pdf->SetXY((210 - $width) / 2, 60);
@@ -205,37 +205,37 @@ class ByLDK extends IPDFLayout
         }
         if ($intro) {
             $pdf->SetX(24);
-            $pdf->SetFont('helvetica', 'B', 12);
+            $pdf->SetFont('dejavusans', 'B', 12);
             $pdf->MultiCell(160, 13, $intro, 0, 'C');
             $pdf->Ln(7);
         }
 
 
         $pdf->SetX(12);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
         $pdf->MultiCell(50, 0, \Yii::t('export', 'Initiators') . ':', 0, 'L', false, 0);
-        $pdf->SetFont('helvetica', '', 12);
+        $pdf->SetFont('dejavusans', '', 12);
         $pdf->MultiCell(120, 0, $amendment->getInitiatorsStr(), 0, 'L');
         $pdf->Ln(5);
 
         $proposal = $amendment->getLatestProposal();
         if ($amendment->getMyMotionType()->getSettingsObj()->showProposalsInExports && $proposal->proposalStatus !== null && $proposal->isProposalPublic()) {
             $pdf->SetX(12);
-            $pdf->SetFont('helvetica', 'B', 12);
+            $pdf->SetFont('dejavusans', 'B', 12);
             $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
             $pdf->MultiCell(50, 0, \Yii::t('export', 'proposed_procedure') . ':', 0, 'L', false, 0);
-            $pdf->SetFont('helvetica', '', 12);
+            $pdf->SetFont('dejavusans', '', 12);
             $pdf->MultiCell(120, 0, $proposal->getFormattedProposalStatus(), 0, 'L');
             $pdf->Ln(5);
         }
 
         $pdf->SetX(12);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->MultiCell(12, 0, '', 0, 'L', false, 0);
 
         $pdf->MultiCell(50, 0, \Yii::t('export', 'title') . ':', 0, 'L', false, 0);
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $borderStyle = ['width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => [150, 150, 150]];
         $pdf->MultiCell(
             100,

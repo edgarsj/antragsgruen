@@ -54,7 +54,7 @@ class DBJRPDF extends IPdfWriter
         // Position at 15 mm from bottom
         $this->SetY(-15);
         // Set font
-        $this->SetFont('helvetica', '', 8);
+        $this->SetFont('dejavusans', '', 8);
         // Page number
         $this->Cell(
             0,

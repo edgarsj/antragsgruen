@@ -31,7 +31,7 @@ class DBJR extends IPDFLayout
             $pdf->setY($logo['y'] + $logo['h'] + $abs);
         }
 
-        $pdf->SetFont('helvetica', 'B', $fontsize);
+        $pdf->SetFont('dejavusans', 'B', $fontsize);
         $pdf->SetTextColor(40, 40, 40, 40);
         //$pdf->SetXY($left, $wraptop);
         $pdf->Write(0, mb_strtoupper($motion->motionType->titleSingular, 'UTF-8') . "\n");
@@ -40,7 +40,7 @@ class DBJR extends IPDFLayout
         $wraptop = $pdf->getY() + $abs;
         $pdf->SetXY($left, $wraptop);
 
-        $pdf->SetFont('helvetica', 'I', 11);
+        $pdf->SetFont('dejavusans', 'I', 11);
         $intro = $motion->getMyMotionType()->getSettingsObj()->pdfIntroduction;
         if ($intro) {
             $pdf->MultiCell(160, 0, $intro, 0, 'L');
@@ -57,10 +57,10 @@ class DBJR extends IPDFLayout
 
         $pdf->Ln(9);
 
-        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->SetFont('dejavusans', 'B', 12);
         $pdf->writeHTML('<h3>' . Html::encode($motion->getTitleWithPrefix()) . '</h3>');
 
-        $pdf->SetFont('helvetica', '', 12);
+        $pdf->SetFont('dejavusans', '', 12);
     }
 
     public function printAmendmentHeader(Amendment $amendment): void
@@ -108,7 +108,7 @@ class DBJR extends IPDFLayout
         }
 
         $pdf->SetTextColor(100, 100, 100, 100);
-        $pdf->SetFont('helvetica', 'I', 11);
+        $pdf->SetFont('dejavusans', 'I', 11);
         $pdf->SetXY($left, $pdf->getY());
         $pdf->Ln(3);
         $intro = $amendment->getMyMotionType()->getSettingsObj()->pdfIntroduction;
@@ -118,16 +118,16 @@ class DBJR extends IPDFLayout
         }
 
         $pdf->SetTextColor(40, 40, 40, 40);
-        $pdf->SetFont('helvetica', 'B', $title1Fontsize);
+        $pdf->SetFont('dejavusans', 'B', $title1Fontsize);
         $pdf->MultiCell(0, 0, trim($amendment->getMyMotion()->getTitleWithPrefix()), 0, 'L');
         $pdf->Ln(3);
-        $pdf->SetFont('helvetica', 'B', $title2Fontsize);
+        $pdf->SetFont('dejavusans', 'B', $title2Fontsize);
         $pdf->Write(0, mb_strtoupper(\Yii::t('amend', 'amendment') . ' ' . $amendment->getFormattedTitlePrefix(), 'UTF-8') . "\n");
         $pdf->Ln(3);
 
         $pdf->SetX($left);
         $pdf->SetTextColor(100, 100, 100, 100);
-        $pdf->SetFont('helvetica', 'I', 11);
+        $pdf->SetFont('dejavusans', 'I', 11);
         $data = $amendment->getDataTable();
         foreach ($data as $key => $val) {
             $pdf->SetX($left);
@@ -136,7 +136,7 @@ class DBJR extends IPDFLayout
             $pdf->Ln(5);
         }
 
-        $pdf->SetFont('helvetica', '', 12);
+        $pdf->SetFont('dejavusans', '', 12);
         $pdf->ln(7);
     }
 
