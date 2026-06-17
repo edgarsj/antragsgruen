@@ -27,6 +27,8 @@ RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
 
 RUN echo 'date.timezone = Europe/Riga' > /usr/local/etc/php/conf.d/timezone.ini
 
+RUN printf 'max_execution_time = 300\nmemory_limit = 512M\n' > /usr/local/etc/php/conf.d/limits.ini
+
 RUN mkdir /tmp/viewcache && chown 1000:1000 /tmp/viewcache
 
 WORKDIR /var/www/antragsgruen
